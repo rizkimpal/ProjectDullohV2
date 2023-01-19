@@ -1,0 +1,16 @@
+.h-sc {
+  height: 200vh;
+}
+.justify-start {
+  justify-content: start;
+}
+.items-start {
+  align-items: start;
+}
+.text-start {
+  text-align: start;
+}
+.w-10{
+  width: 100px;
+}
+

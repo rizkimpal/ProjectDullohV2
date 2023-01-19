@@ -1,0 +1,58 @@
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MainWindow</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+    <div
+      class="md:max-h-screen md:h-screen h-[115vh] w-full md:bg-[#cec9b3] bg-[#cec9b3] md:pb-0 pb-8 items-center justify-center"
+    >
+      <div
+        class="flex justify-center items-center w-full h-16 shadow-md top-0 left-0 bg-indigo-400"
+      >
+        <p class="font-semibold text-2xl text-white">Project Dulloh dan Dedi</p>
+      </div>
+      <h1 class="text-white font-medium text-3xl text-center mt-5">
+        <a> MainWindow </a>
+      </h1>
+      <div
+        class="flex w-full h-[15vh] md:h-[15vh] md:justify-center md:items-center"
+      >
+        <div class="flex justify-around items-center w-full md:w-[60%] h-full">
+          <a href="/background">
+            <button
+              type="button"
+              class="text-white bg-gradient-to-r from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-2 border-white"
+              onClick="{props.onClick1}"
+            >
+              Background
+            </button>
+          </a>
+          <a href="/background/objek">
+            <button
+              type="button"
+              class="text-white bg-gradient-to-r from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-2 border-white"
+              onClick="{props.onClick2}"
+            >
+              Objek
+            </button>
+          </a>
+          <a href="/background/analisisFFT">
+            <button
+              type="button"
+              class="text-white bg-gradient-to-r from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-2 border-white"
+              onClick="{props.onClick2}"
+            >
+              Analisis FFT
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
