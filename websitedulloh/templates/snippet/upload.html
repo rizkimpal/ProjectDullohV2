@@ -1,0 +1,17 @@
+<div id="upload" class="flex flex-col text-start text-2xl mt-5">
+    <div class="flex gap-2 mt-5">
+      <form enctype="multipart/form-data" action="" method="POST">
+        {% csrf_token %}
+        <label for="micDekat"> mic Dekat: </label>
+        <input type="file" name="micDekat" id="micDekat" />
+        <br />
+        <label for="micJauh"> mic Jauh: </label>
+        <input type="file" name="micJauh" id="micJauh" />
+        <div
+          class="justify-start from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg px-5 py-2.5 text-center border-2 border-biru mt-5 w-10"
+        >
+          <input type="submit" name="btn_upload" value="UPLOAD" />
+        </div>
+      </form>
+    </div>
+  </div>

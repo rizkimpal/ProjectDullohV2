@@ -1,0 +1,128 @@
+{% load tailwind_tags %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static "css/screen.css" %}">
+    <title>{{title}}</title>
+    {% tailwind_css %}
+  </head>
+  <style>
+    #rekam {
+      padding: 10px;
+      display: none;
+      background-color: cadetblue;
+    }
+    #upload {
+      padding: 10px;
+      background-color: #deeaf6;
+      text-align: center;
+      display: none;
+    }
+  </style>
+  <body>
+    <div class="w-full md:bg-[#609885] bg-[#609885] md:pb-0 pb-8 ;">
+      {% include "snippet/title.html" %}
+      <h1 class="text-black font-medium text-2xl text-center my-5">
+        Masukkan Input {{title}} dengan cara apa?
+      </h1>
+      {% include "snippet/button.html" %}
+      <div id="rekam" class="flex flex-col text-start text-2xl mt-5">
+        <div class="font-medium">
+          <p>list microphone yang ada di device ini</p>
+          <div class="flex flex-row mt-5">
+            <ul>
+              {% for num,name in mic%}
+              <li>{{num}}.</li>
+              {% endfor %}
+            </ul>
+            <ul>
+              {% for num,name in mic%}
+              <li>{{name}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <p class="mt-5">
+            silahkan pilih micnya dan tekan RECORD untuk merekam suara
+          </p>
+        </div>
+        <div class="flex gap-2 mt-5">
+          <form action="" method="POST">
+            {% csrf_token %}
+            <label for="mic1"> mic1: </label>
+            <input type="number" name="mic1" id="mic1" value="0" />
+            <br />
+            <label for="mic2"> mic2: </label>
+            <input type="number" name="mic2" id="mic2" value="0" />
+            <br />
+            {% block nameRekam %} {% endblock nameRekam %}
+            <div
+              class="justify-start from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg px-5 py-2.5 text-center border-2 border-white mt-5 w-10"
+            >
+              <input type="submit" name="btn_record" value="RECORD" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="upload" class="flex flex-col text-start text-2xl mt-5">
+        <div class="flex gap-2 mt-5">
+          <form enctype="multipart/form-data" action="" method="POST">
+            {% csrf_token %}
+            <label for="micDekat"> mic Dekat: </label>
+            <input type="file" name="micDekat" id="micDekat" />
+            <br />
+            <label for="micJauh"> mic Jauh: </label>
+            <input type="file" name="micJauh" id="micJauh" />
+            {% block nameUpload %} {% endblock nameUpload %}
+            <div
+              class="justify-start from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg px-5 py-2.5 text-center border-2 border-biru mt-5 w-10"
+            >
+              <input type="submit" name="btn_upload" value="UPLOAD" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <p class="flex justify-center text-center text-3xl mt-5">{{status}}</p>
+      <div class="flex flex-col items-center w-full mt-5">
+        <img
+          id="micDekat"
+          src="{{  MEDIA_URL }}{{title}}/img/Mic Dekat.png?{{time}}"
+        />
+        <img
+          src="{{  MEDIA_URL }}{{title}}/img/Mic Jauh.png?{{time}}"
+          id="micJauh"
+        />
+      </div>
+      <div class="flex justify-center mt-5">
+        <img
+          src="{{  MEDIA_URL }}{{title}}/img/analisisFFT.png?{{time}}"
+          id="analisisFFT"
+        />
+      </div>
+      <div class="flex justify-center mt-5">
+        <a href="/objek">
+          <button
+            type="button"
+            class="text-white bg-gradient-to-r from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-2 border-white"
+          >
+            next?
+          </button>
+        </a>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    btnRekam.onclick = showRekam;
+    btnUpload.onclick = showUpload;
+    function showRekam() {
+      rekam.style.display = "block";
+      upload.style.display = "none";
+    }
+    function showUpload() {
+      rekam.style.display = "none";
+      upload.style.display = "block";
+    }
+  </script>
+</html>
