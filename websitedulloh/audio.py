@@ -136,14 +136,14 @@ def noise_red2(MJ, MD, prop_decrease = 0.5, verbose = False, visual = False, fft
     return output
 
 def analisisFFT(sample,path,label):
+    analisisFFTOne(sample,path,label)
     convertFromPSD = 10**(-77/20)
     x = 1
     sinyal = []
     fig, ax = plt.subplots(figsize=(20,8))
     while(x <= sample):
-        AudioName = f"media/{path}/audio/New Audio background {x}.wav"  # Audio File
+        AudioName = f"media/final/audio/Final Audio {x}.wav"  # Audio File
         fs, data = wavfile.read(AudioName)
-        convertFromPSD = 10**(-70.5/20)
         dB = data*convertFromPSD
         global sinyalName
         sinyalName.append(label)
@@ -158,7 +158,29 @@ def analisisFFT(sample,path,label):
     ax.yaxis.set_major_locator(MultipleLocator(5))
     ax.set_title('Analisis Frekuensi', size=72, font="Times New Roman")
     ax.legend(fontsize=18)
-    plt.savefig(f'media/{path}/img/analisisFFT.png')
+    plt.savefig(f'media/final/img/analisisFFTfinal.png')
     return{
         print(f"successfully done from make background analisis")
+    }
+def analisisFFTOne(sample,path,title):
+    convertFromPSD = 10**(-77/20)
+    fig, ax = plt.subplots(figsize=(20,8))
+    if(title == "background"):
+        AudioName = f"media/{path}/audio/New Audio {title}.wav"  # Audio File
+    else:
+        AudioName = f"media/{path}/audio/New Audio {sample}.wav"  # Audio File
+    fs, data = wavfile.read(AudioName)
+    dB = data*convertFromPSD
+    sinyal= WelchPeriodogram(dB, NFFT=2048, sampling=fs,label=title)
+    plt.ylabel('dB', size="24", font="Times New Roman")
+    plt.xlim(2500, 8000)
+    plt.xlabel('Frekuensi (Hz)', size=24, font="Times New Roman")
+    ax.xaxis.set_major_locator(MultipleLocator(200))
+    ax.yaxis.set_major_locator(MultipleLocator(5))
+    ax.set_title('Analisis Frekuensi', size=72, font="Times New Roman")
+    ax.legend(fontsize=18)
+    plt.savefig(f'media/{path}/img/analisisFFT_{title}.png')
+    
+    return{
+        print(f"print 1")
     }

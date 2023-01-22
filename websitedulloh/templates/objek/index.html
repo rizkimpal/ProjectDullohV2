@@ -1,12 +1,20 @@
-{% extends 'base.html' %}
-{% block nameRekam %}
+{% extends 'base.html' %} {% block nameRekam %}
 <div class="mt-5">
   <label for="name">Masukkan nama suara: </label>
-  <input type="text" name="name" id="name" value=" " />
+  <input type="text" name="name" id="name" value="" />
 </div>
 {% endblock nameRekam %} {% block nameUpload %}
 <div class="mt-5">
   <label for="name">Masukkan nama suara: </label>
-  <input type="text" name="name" id="name" value=" " />
+  <input type="text" name="name" id="name" value="" />
 </div>
-{% endblock nameUpload %}
+{% endblock nameUpload %} {% block buttonNext %}
+<a href="/analisisFFT">
+  <button
+    type="button"
+    class="text-white bg-gradient-to-r from-slate-500 to-slate-600 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 border-2 border-white"
+  >
+    Lanjut ke Final
+  </button>
+</a>
+{% endblock buttonNext %}

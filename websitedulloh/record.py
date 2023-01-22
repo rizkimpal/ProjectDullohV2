@@ -5,7 +5,6 @@ from scipy.io import wavfile
 import audio as aud
 
 sample = 0
-
 def listMic():
 
     p = pyaudio.PyAudio()
@@ -95,7 +94,7 @@ def record(mice1,mice2,title,label):
     wf.close()
 
     status = "Audio Saved"
-    getaudio(title)
+    getaudio(title,label)
     aud.analisisFFT(sample,title,label)
     return(status)
 
@@ -112,19 +111,16 @@ def upload(short,long,title,label):
     
     status = "Audio dekat dan jauh sudah tersimpan"
     status = "Audio Saved"
-    getaudio(title)
+    getNewAudio(title,label)
     aud.analisisFFT(sample,title,label)
     return(status)
 
 #fungsi mendapatkan audio baru 
-def getaudio(Title):
+def getNewAudio(Title,label):
 
     MJ_BG = f"media/{Title}/audio/voiceDekat.wav"
     MD_BG = f"media/{Title}/audio/voiceJauh.wav"
-
-    global sample
-    sample = sample + 1
-
+        
     sr_MJ_BG, MJ_BG = aud.read_audio(MJ_BG)
     sr_noise, MD_BG = aud.read_audio(MD_BG)
 
@@ -132,9 +128,22 @@ def getaudio(Title):
     MD_BG = aud.generate_noise_sample(MD_BG,sr_noise, 2)
 
     output_BG = aud.noise_red(MJ_BG, MD_BG,Title, fft_size=4096, iterations=3)
-    db = wavfile.write(
-        f'media/{Title}/audio/New Audio Background {sample}.wav', 44100, output_BG.astype(np.int16))
-    return{print(f'terbuat audio Background dengan nama New Audio Background {sample}.wav')
-    }
-    
-    
+    if(label == "background"):
+        db = wavfile.write(f'media/{Title}/audio/New Audio {label}.wav', 44100, output_BG.astype(np.int16))
+        status = "background sudah terinput"
+    else:
+        global sample
+        sample += 1
+        db = wavfile.write(f'media/{Title}/audio/New Audio {sample}.wav', 44100, output_BG.astype(np.int16))
+        MJ_BG = f"media/background/audio/New Audio background.wav"
+        MD_BG = f"media/{Title}/audio/New Audio {sample}.wav"
+        sr_MJ_BG, MJ_BG = aud.read_audio(MJ_BG)
+        sr_noise, MD_BG = aud.read_audio(MD_BG)
+
+        MJ_BG = MJ_BG.astype(float)
+        MD_BG = aud.generate_noise_sample(MD_BG,sr_noise, 2)
+
+        output_BG = aud.noise_red(MJ_BG, MD_BG,Title, fft_size=4096, iterations=3)
+        db = wavfile.write(f'media/final/audio/Final Audio {sample}.wav', 44100, output_BG.astype(np.int16))
+        status = f"success membuat final audio dengan nama Final Audio {sample}.wav"
+    return(status)

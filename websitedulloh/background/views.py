@@ -8,6 +8,7 @@ def index(req):
     
     context = {
         "title":"background",
+        "judul":"background",
         "status":" ",
         "mic": [],
         "time" : t
