@@ -94,7 +94,7 @@ def record(mice1,mice2,title,label):
     wf.close()
 
     status = "Audio Saved"
-    getaudio(title,label)
+    getNewAudio(title,label)
     aud.analisisFFT(sample,title,label)
     return(status)
 

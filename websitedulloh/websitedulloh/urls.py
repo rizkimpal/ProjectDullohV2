@@ -10,6 +10,6 @@ urlpatterns = [
     re_path(r'^$',views.index),
     re_path(r'^background/',include('background.urls')),
     re_path(r'^objek/',include('objek.urls')),
-    re_path(r'^analisisFFT-final/',include('analisisFFT.urls'))
+    re_path(r'^analisisFFT/',include('analisisFFT.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
